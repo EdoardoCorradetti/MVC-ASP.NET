@@ -5,3 +5,4 @@ Install-Package EntityFramework
 After Database Connection in MostreCollections
 Enable-Migrations
 Add-Migration GamMostre
+Update-Database -Verbose
