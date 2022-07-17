@@ -13,6 +13,6 @@ The customer needs a visualization of the various exhibits in a museum (for exam
 
 -See details of each artwork;
 
--Use the Open Data from Torino Musei Foundation site https://www.fondazionetorinomusei.it/it/opendata - SCARICA I DATASET -> COLLEZIONI -> GAM -> XLSX;
+-Use the Open Data from Torino Musei Foundation site https://www.fondazionetorinomusei.it/it/opendata - SCARICA I DATASET -> COLLEZIONI -> GAM -> XLS;
 
 -Use Entity Framework - Code First.
