@@ -8,7 +8,7 @@
         public override void Up()
         {
             CreateTable(
-                "dbo.Autores",
+                "dbo.Autori",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -17,7 +17,7 @@
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Dataziones",
+                "dbo.Datazioni",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -26,7 +26,7 @@
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Mostras",
+                "dbo.Mostre",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -39,8 +39,8 @@
                         Datazione_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Autores", t => t.Autore_Id)
-                .ForeignKey("dbo.Dataziones", t => t.Datazione_Id)
+                .ForeignKey("dbo.Autori", t => t.Autore_Id)
+                .ForeignKey("dbo.Datazioni", t => t.Datazione_Id)
                 .Index(t => t.Autore_Id)
                 .Index(t => t.Datazione_Id);
             
@@ -48,13 +48,13 @@
         
         public override void Down()
         {
-            DropForeignKey("dbo.Mostras", "Datazione_Id", "dbo.Dataziones");
-            DropForeignKey("dbo.Mostras", "Autore_Id", "dbo.Autores");
-            DropIndex("dbo.Mostras", new[] { "Datazione_Id" });
-            DropIndex("dbo.Mostras", new[] { "Autore_Id" });
-            DropTable("dbo.Mostras");
-            DropTable("dbo.Dataziones");
-            DropTable("dbo.Autores");
+            DropForeignKey("dbo.Mostre", "Datazione_Id", "dbo.Datazioni");
+            DropForeignKey("dbo.Mostre", "Autore_Id", "dbo.Autori");
+            DropIndex("dbo.Mostre", new[] { "Datazione_Id" });
+            DropIndex("dbo.Mostre", new[] { "Autore_Id" });
+            DropTable("dbo.Mostre");
+            DropTable("dbo.Datazioni");
+            DropTable("dbo.Autori");
         }
     }
 }
