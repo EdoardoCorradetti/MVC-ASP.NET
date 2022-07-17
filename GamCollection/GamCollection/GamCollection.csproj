@@ -126,6 +126,7 @@
     </Compile>
     <Compile Include="Models\Autore.cs" />
     <Compile Include="Models\Datazione.cs" />
+    <Compile Include="Models\Mostra.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
