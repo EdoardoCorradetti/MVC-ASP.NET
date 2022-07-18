@@ -15,5 +15,9 @@ namespace GamCollection.Controllers
         {
             return View(db.Autori.ToList());
         }
+        public ActionResult ListMostre(int id)
+        {
+            return View(mostre);
+        }
     }
 }

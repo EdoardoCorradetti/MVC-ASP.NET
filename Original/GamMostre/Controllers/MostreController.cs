@@ -1,19 +1,19 @@
-﻿using GamCollection.Models;
+﻿using GamMostre.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace GamCollection.Controllers
+namespace GamMostre.Controllers
 {
     public class MostreController : Controller
     {
-        private CollezioniContext db = new CollezioniContext();
+        private MostreContext db = new MostreContext();
         // GET: Mostre
         public ActionResult Index()
         {
-            //List of the first 100 Mostre
+            //elenco delle prime 100 mostre
             var mostre = db.Mostre.Take(100).ToList();
             return View(mostre);
         }

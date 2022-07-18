@@ -1,0 +1,57 @@
+﻿@model GamCollection.Models.Mostra
+
+@{
+    ViewBag.Title = "Mostra";
+}
+
+<h2>Mostra</h2>
+
+<div>
+    <h4>Mostra</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Technique)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Technique)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dimension)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dimension)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(model => model.Image)" width="200" height="200" />
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
