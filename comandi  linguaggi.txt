@@ -1,0 +1,148 @@
+PROGETTO ASP.NET MVC .NETFramework  C#
+
+In MODELS inserire 2 classi(Autore e Mostra)
+prop + tab (2 frecce) per visualizzare piu in fretta public
+
+nella classe Autore :
+int Id
+string Nominativo
+
+DataAnnotation dopo namespace:
+[Table("Autori")]  lampadina schem
+
+---------------------------
+nella classe Mostra:
+int Id
+string Titolo
+string Datazione
+string Tecnica
+string Dimensione
+string Immagine
+Autore Autoren
+
+DataAnnotation dopo namespace:
+[Table("Mostre")]  lampadina schema
+------------------------------------------
+Install-Package EntityFramework
+
+craere la classe sempre in models per gestire il context (per definire il db) - MostreContext 
+
+la classe deve essere MostreContext:DbContext
+
+public  DbSet Autore Autori                 modificando in Data Entity sempre nella classe Context
+public  DbSet Mostra Mostre                 in Dtata Entity
+
+----------------------------------------------
+Riferimenti alla connessione del Db (nome del dbms, nome db, username e password) 
+nel Web Config fra configsection e appsettings :
+
+<connectionStrings>
+ <add name="MostreConnection" 
+      connectionStrings="Data Soure=localhost;Initial Catalog=GamMostreIntagrated Security=true" 
+      providerName="System.Data.SqlClient"/> classi per parlare con sqlserver
+<connection>
+--------------------------------------------
+in Mostre Context
+
+genera costruttotre senza  niente (tramite lampadina) e scrivere:
+
+Database.Connection.ConnectionString=ConfigurationManager.ConnectionStrings["MostreConnection"].connectionStrings;
+                                     using System.Configuration 
+---------------------------------------------------
+In prompt dei comandi
+Enable-Migrations poi Add-Migration GamMostre     
+
+PER PORTARE SUL DATABASE:
+Update-Database -Verbose
+
+Errore:portare tutti using sopra namespace
+Tagliare GameMostre.Models e incollarlo come using e cancellare quello sotto
+
+ricompilare verbose
+----------------------
+Aggiungere controller di nome Mostre
+sopra get:
+private MostreContexr db = new MostreContext();   corretto con using
+in action:
+var mostre = db.Mostre.ToList();
+mostre fra parentesi
+tasto destro su Index --- aggiungi visualizzazione (index - list- mostra- mostre)
+in index sopra Titolo mettere uno uguale ma con Autore.Nominativo
+in index mettere <img src="@...()" />
+
+-----------------------
+in layout mettere Gam Mostre al posto di applicazione aspnet
+sempre li in navbar riga 24:
+3 action lik come primo 
+ma il 2 è Mostre-Index-Mostre
+   il 3 è Autori-Index-Autori  (etichetta, action, controller)
+----------------------
+                                                                                             IN DATABASE-SSMS
+
+tasto destro db - import data - next - file excel - selezionare il file scaricato dal sito - destination: sqlserver - 1 foglio cambiando nome in Import
+su db New query-
+Insert Into Autori
+Select Distinct Autore from Import - Execute poi 
+
+Use GamMostre
+go
+Insert Into Mostre
+Select i.Titolo,i.Datazione,i.Tecnica,i.DimensionI,i.Immagine,a.Id 
+from Import i Inner Join Autori a
+on i.Autore=a.Nominativo - Execute
+
+---------------------------
+in VISUAL STUDIO MANDARE IN ESECUZIONE
+
+--------------------------------------
+creare controller Autori e sempre in autori:
+inserire prima di get :            private MostreContext db = new MostreContext() - il tutto using Mostre per correggere
+in Action result fra parentesi:    (db.Autori.ToList())
+tasto destro Index - aggiungi visualizzazione (index - list - Autore - Mostre)
+----------------------------------
+In MOSTRE CONTROLLER:
+copiare e incollare di seguito tutto l'action result poi - ActionResult Mostra (int id)- sostiture mostre con mostra - db.Mostre.Find(id)
+sotto var : if(mostra==null)
+               return httpNotFound();
+Mostra di ActionResult aggiungi visualizzazione (Mostra - Details - Mostra - Mostre)
+
+IN MOSTRA.CSHTML da:
+L'ultima immagine html: <img src="....()" />
+sotto cancella penultimo ActionLink
+
+IN INDEX.CSHTML:
+In alto cancellare action link in p
+In fondo lasciare solo Details e cancellare le altre 2
+Sempre in Details sostituirli con Visualizza mostre e Elenco Mostre
+
+IN MOSTRA.CSHTML*:
+In alto cancellare action link in p
+l'ultimo action link diventa. Visualizza e Mostra
+
+IN MOSTRE CONTROLLER:
+var mostre = db.Mostre.Take(100).ToList();
+
+IN AUTORI CONTROLLER
+1 action: (db.Autori.OrderBy(x ==> x.Nominativo).ToList)
+creare una copia di action ma:
+Action Result ElencoMostre (int id)
+
+scrivere prima di var: ViewBag.Autore = db.Autori.Find(id).Nominativo;
+var mostre = db.Mostre.Where(x ==> x.Autore.Id==id).ToList();
+Elenco mostre aggiungi visualizzazione (Elenco Mostre - list - mostra -mostre)
+
+IN ELENCOMOSTRECSHTML:
+In alto fra h2 Elenco Mostre per Autore @ViewBag.Autore
+In alto cancellare action link in p
+In fondo lasciare solo Details e cancellare le altre 2
+
+
+
+
+
+
+
+
+
+
+     
